@@ -3,7 +3,6 @@
 This project uses PyTorch to build a movie recommendation system based on user ratings. It includes a Flask web interface for generating recommendations.
 
 ![App Screenshot](images/app_screenshot.png)
-
 ## Features
 
 - **Interactive Interface**: Built with Flask and HTML/CSS.
