@@ -4,6 +4,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 from utils.utils import load_data, preprocess_data
 from model import RecommendationModel
+from sklearn.metrics import mean_squared_error, mean_absolute_error
 import pickle
 
 # Load and preprocess data
@@ -51,6 +52,14 @@ for epoch in range(10):
         if i % 100 == 0:
             print(f"Epoch {epoch + 1}, Batch {i}, Loss: {loss.item()}")
     print(f"Epoch {epoch + 1} completed, Loss: {loss.item()}")
+
+# Add model performance metrics
+with torch.no_grad():
+    test_predictions = model(user_ids, movie_ids)
+    mse = mean_squared_error(ratings.numpy(), test_predictions.numpy())
+    mae = mean_absolute_error(ratings.numpy(), test_predictions.numpy())
+    print(f"Mean Squared Error (MSE): {mse}")
+    print(f"Mean Absolute Error (MAE): {mae}")
 
 # Save the model
 print("Saving the model...")
